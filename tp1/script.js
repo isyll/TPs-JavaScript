@@ -1,21 +1,54 @@
-var component = document.createElement("div");
-var component__head = document.createElement("div");
-var component__textarea = document.createElement("textarea");
 
-var head__icons = document.createElement("div");
-var icons = document.createElement("i");
+function removeComponentFromTrashIcon(e)
+{
+    return e.parentNode.parentNode.parentNode.parentNode
+    .removeChild(e.parentNode.parentNode.parentNode);
+}
 
-icons.className = "fa-solid";
-icons.classList.add("fa-pen-to-square");
-head__icons.appendChild(icons);
-component__head.appendChild(head__icons);
+function addNote()
+{
+    var components = document.querySelector('.components');
 
-component.className = "component";
-component__head.className = "component__head";
-component__textarea.className = "component__textarea";
+    var element = document.createElement("div");
+    var element__head = document.createElement("div");
+    var textarea = document.createElement("textarea");
+    var head__icons = document.createElement('div');
 
-component.appendChild(component__head);
-component.appendChild(component__textarea);
+    var icon__trash = document.createElement('i');
+    var icon__edit = document.createElement('i');
 
-document.getElementsByClassName("components").appendChild(component);
-alert("ok");
+    icon__trash.classList.add("fa-solid");
+    icon__trash.classList.add("icon");
+    icon__trash.classList.add("icon-trash");
+    icon__trash.classList.add("fa-trash-can");
+
+    icon__edit.classList.add("fa-solid");
+    icon__edit.classList.add("icon");
+    icon__edit.classList.add("icon-edit");
+    icon__edit.classList.add("fa-pen-to-square");
+
+    element.classList.add('component');
+    textarea.classList.add('component__textarea');
+    element__head.classList.add("component__head");
+    head__icons.classList.add("head__icons");
+
+    head__icons.appendChild(icon__edit);
+    head__icons.appendChild(icon__trash);
+
+    element__head.appendChild(head__icons);
+    element.appendChild(element__head);
+    element.appendChild(textarea);
+
+    components.appendChild(element);
+
+    icon__trash.addEventListener('click', () => {
+        element.parentNode.removeChild(element);
+    });
+
+    icon__edit.addEventListener('click', () => {
+        textarea.readOnly = !textarea.readOnly;
+    });
+
+}
+
+document.querySelector(".add-note__button").onclick = addNote;
