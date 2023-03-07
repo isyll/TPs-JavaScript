@@ -19,26 +19,19 @@
             p.classList.add('para');
             p.appendChild(document.createTextNode(texts[i]));
             leftSide.append(p);
+            texts[i] = p;
         }
+
+        return texts;
     }
 
-    function removeActive()
+    function selectParagraph(list, event)
     {
-        let ps = document.getElementsByClassName("para");
-        for (let i = 0; i < ps.length; i ++)
-        {
-            ps[i].classList.remove("active");
-        }
-    }
-
-    function selectParagraph()
-    {
-        let ps = document.getElementsByClassName("para");
-
-        for (let i = 0; i < ps.length; i ++)
-            ps[i].addEventListener("mouseover", () => {
-                removeActive();
-                ps[i].classList.add("active");
+        for (let i = 0; i < list.length; i ++)
+            list[i].addEventListener(event, () => {
+                for (let j = 0; j < list.length; j ++)
+                    list[j].classList.remove("active");
+                list[i].classList.add("active");
             });
     }
 
@@ -69,8 +62,8 @@
         });
     }
 
-    generer();
-    selectParagraph();
+    const ps = generer();
+    selectParagraph(ps, 'mouseover');
     setInterval(disableButton, 100);
     moveEvent(moveLeftButton, leftSide);
     moveEvent(moverighttButton, rightSide);
