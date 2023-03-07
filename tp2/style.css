@@ -61,3 +61,15 @@ button:disabled {
     color: grey;
     background-color: lightgrey;
 }
+
+div.notif {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 10px;
+    width: 35%;
+    height: 35%;
+    border: 1px solid black;
+    background-color: white;
+    /* margin-top: -250px;
+    margin-left: -250px; */
+}
