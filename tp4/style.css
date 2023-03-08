@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #58378B;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    width: 50%;
+    padding: 15px 10px;
+    color: white;
+    padding: 5px 10px;
+    background-color: #2A124D;
+}
+
+.container__top {
+    background-color: #58378B;
+    padding: 0.5em 15px 0 15px;
+    font-size: 1.5rem;
+}
+
+.pwd-generated {
+    height: 1.5em;
+    text-align: center;
+}
+
+.generate-password {
+    display: block;
+    padding: 5px 10px;
+    color: #58378B;
+    background-color: #E5B63E;
+    border: none;
+    border-radius: 10px;
+    margin: 20px auto;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: uppercase;
+}
+
+.generate-password:active {
+    transform: translate(1px,1px);
+}
+
+.options {
+    width: 100%;
+    border: none;
+}
+
+.options td {
+    padding: 5px 10px;
+}
+
+.options td:nth-child(2) {
+    display: flex;
+    justify-content: end;
+}
+
+.form-input.input--text {
+    padding: 5px;
+}
+
+#modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#modal {
+    width: 33%;
+    height: 33%;
+    padding: 10px;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#close-modal {
+}
