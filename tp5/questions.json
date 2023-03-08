@@ -1,0 +1,76 @@
+{
+    "questions" : [
+        {
+            "title" : "Quel célèbre dictateur dirigea l’URSS du milieu des années 1920 à 1953 ?",
+            "a" : "Molotov",
+            "b" : "staline",
+            "c" : "lenine",
+            "d" : "trotski",
+            "correct" : "b",
+            "comments" : "Joseph Staline (1878 – 1953), de son vrai nom Iossif Vissarionovitch Djougachvili, a dirigé l’Union des républiques socialistes soviétiques, en occupant diverses fonctions (en tant que secrétaire général du comité centrale du parti communiste notamment). Après la mort de Lénine (1870 – 1924), le fondateur de l’URSS, il sut éliminer ses rivaux politiques, Trotski (1879 – 1940) au premier titre."
+        },
+        {
+            "title" : "Dans quel pays peut-on trouver la Catalogne, l’Andalousie et la Castille ?",
+            "a" : "Italie",
+            "b" : "Hongrie",
+            "c" : "France",
+            "d" : "Espagne",
+            "correct" : "d",
+            "comments" : "Castille sont des régions historiques de l’Espagne. Cependant, seules les deux premières sont des communautés autonomes (comunidades autónomas), une division territoriale. La Castille est divisée en plusieurs communautés autonomes (Castille-et-Léon, Castille La Manche, Madrid, etc.)."
+        },
+        {
+            "title" : "Le pinguoin est-il un oiseau",
+            "a" : "Oui",
+            "b" : "Non",
+            "correct" : "a",
+            "comments" : "Le mot « pingouin » désigne en réalité le Petit Pingouin (Alca torda) qui, contrairement au manchot, sait voler."
+        },
+        {
+            "title" : "Quel pays a remporté la coupe du monde de football en 2014 ?",
+            "a" : "Espagne",
+            "b" : "Portugal",
+            "c" : "Allemagne",
+            "d" : "France",
+            "correct" : "c",
+            "comments" : "L’Allemagne a remporté la coupe du monde de 2014 organisée au Brésil après sa victoire 1-0 en finale contre l’Argentine, grâce à un but de Mario Götze marqué à la 113e minute."
+        },
+        {
+            "title" : "Par quel mot désigne-t-on une belle-mère cruelle ?",
+            "a" : "Une jocrisse",
+            "b" : "Une marrâtre",
+            "c" : "Une godiche",
+            "d" : "Une chenapan",
+            "correct" : "b",
+            "comments" : "Marâtre vient du latin populaire matrastra, « femme du père ». Un chenapan et jocrisse s’appliquent surtout à des hommes, chenapan signifiant « vaurien », et jocrisse « mari qui se laisse mener par sa femme ». Une godiche est une femme gauche, un peu bêta, de timidité ridicule, etc."
+        },
+        {
+            "title" : "Quelle profession est concernée par le serment d’Hippocrate ?",
+            "a" : "Avocat",
+            "b" : "Juge",
+            "c" : "Pharmacien",
+            "d" : "Médecin",
+            "correct" : "d",
+            "comments" : "Le grec Hippocrate (Ve – IVe siècle av. J.-C.) est traditionnellement considéré comme le « père de la médecine ». Ce serment est un rite traditionnel, il n’a pas de valeur juridique."
+        },
+        {
+            "title" : "Quelle est la véritable capitale de la Chine ?",
+            "a" : "Shanghaï",
+            "b" : "Canton",
+            "c" : "Pékin",
+            "d" : "Hong-Kong",
+            "e" : "Taïwan",
+            "correct" : "c",
+            "comments": "Pékin, ou Beijing, est bien la capitale de la Chine, et ce depuis la dynastie Ming au XVe siècle."
+        },
+        {
+            "title" : "Quelle est l'animal le plus rapide au monde ?",
+            "a" : "Lion",
+            "b" : "Cheuvreuil",
+            "c" : "Léopard",
+            "d" : "Springbok",
+            "correct" : "d",
+            "comments": "Le springbok est un genre de gazelle que l’on trouve au sud de l’Afrique."
+        }
+    ]
+}
+
