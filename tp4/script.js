@@ -3,6 +3,7 @@ window.onload = (function() {
 
     let generateButton = document.getElementById('generate-password');
     let pwdContainer = document.getElementById('pwd-generated');
+    let containerTop = document.querySelector('.container__top');
 
     let pwdOptions = {
         length: document.getElementById('pwd-len'),
@@ -25,47 +26,19 @@ window.onload = (function() {
         }
     };
 
-    function modalWindow(text)
-    {
-        let bcg = document.createElement('div');
-        let modal = document.createElement('div');
-        let closeModal = document.createElement('div');
-        let removeModalWindow = () => bcg.style.display = 'none';
-
-        bcg.setAttribute('id', 'modal-background');
-        modal.setAttribute('id','modal');
-        closeModal.setAttribute('id', 'close-modal');
-        closeModal.textContent = 'CLOSE';
-
-        modal.appendChild(closeModal);
-        bcg.appendChild(modal);
-        document.body.appendChild(bcg);
-        modal.textContent = text;
-        modal.focus({preventScroll:false});
-
-        modal.addEventListener('focusout', removeModalWindow);
-        closeModal.addEventListener('click', removeModalWindow);
-        modal.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') removeModalWindow();
-        });
-    }
-
     generateButton.addEventListener('click', (e) => {
         if ( ! pwdOptions.total() )
         {
-            //modalWindow("Vous devez d'abord indiquer une option...");
             alert("Vous devez d'abord indiquer une option...");
         }
         else if (! pwdOptions.checkLength() )
         {
-            //modalWindow("Vous devez indiquer un nombre inférieur à 20...");
             alert("La longueur est invalide...");
         }
         else if (pwdOptions.total() === 1
             && (parseInt(pwdOptions.length.value) >= 15
             && parseInt(pwdOptions.length.value) <= 20))
         {
-            //modalWindow("Vous devez cocher au moins une option...");
             alert("Vous devez cocher au moins une option...");
         }
         else
@@ -90,6 +63,14 @@ window.onload = (function() {
             ]
 
             pwdContainer.textContent = shuffle(chars.join('')).substring(0, length);
+            let cpyBtn = document.createElement('button');
+            cpyBtn.textContent = 'Copier';
+            cpyBtn.classList.add('copy-button');
+            containerTop.append(cpyBtn);
+            cpyBtn.addEventListener('click', (e) => {
+                navigator.clipboard.writeText(pwdContainer.textContent);
+                alert('Mot de passe copié');
+            });
         }
     });
 })();
