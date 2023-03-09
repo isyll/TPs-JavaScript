@@ -82,3 +82,30 @@ body {
     transform: translate(1px,1px);
 }
 
+
+#modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#modal {
+    width: 33%;
+    height: 33%;
+    padding: 10px;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#close-modal {
+    font-size: 1rem;
+}
+

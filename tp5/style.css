@@ -52,3 +52,9 @@ body {
     font-size: 1.2rem;
 }
 
+.next-button:disabled {
+    cursor: not-allowed;
+    background-color: #9470cb90;
+    color: rgb(228, 228, 228);
+}
+

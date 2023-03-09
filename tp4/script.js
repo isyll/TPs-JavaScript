@@ -26,6 +26,30 @@ window.onload = (function() {
         }
     };
 
+    function modalWindow(text)
+    {
+        const bcg = document.createElement('div');
+        const modal = document.createElement('div');
+        const closeModal = document.createElement('button');
+        const removeModalWindow = () => bcg.style.display = 'none';
+
+        bcg.setAttribute('id', 'modal-background');
+        modal.setAttribute('id','modal');
+        closeModal.setAttribute('id', 'close-modal');
+        closeModal.textContent = 'CLOSE';
+        closeModal.style.zIndex = 1000;
+
+        modal.appendChild(closeModal);
+        bcg.appendChild(modal);
+        document.body.appendChild(bcg);
+        modal.textContent = text;
+
+        closeModal.addEventListener('click', removeModalWindow);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') removeModalWindow();
+        });
+    }
+
     generateButton.addEventListener('click', (e) => {
         if ( ! pwdOptions.total() )
         {

@@ -1,114 +1,144 @@
-window.onload = (async function() {
+window.onload = (function() {
     'use strict';
 
-    let state = ['start', 'running', 'ended']
-    // Représente les noms de classe qui sont attribués
-    // au bouton pour indiquer comment doit réagir le bouton
-    // lorsqu'on clique dessus.
+    let state = ['start', 'running', 'ended'];
     let currentQuestion = 0;
-    let questions = await (await fetch('./questions.json')).json().questions;
-
-    alert(questions[0]);
-
-    let score = {
-        correct: 0,
-        incorrect: 0
-    };
+    let score = {correct: 0, incorrect: 0};
 
     let qTtitle = document.querySelector('.question--title');
     let qOptions = document.querySelector('.question--options');
     let nextButton = document.querySelector('.next-button');
 
-    nextButton.addEventListener('click', function() {
-        if (nextButton.classList.contains(state[0]))
-        {
-            insertQuestion(questions[0]);
-            nextButton.classList.remove(state[0]);
-            nextButton.classList.add(state[1]);
-        }
-        else if (nextButton.classList.contains(state[1]))
-        {
-            if (questions.length > currentQuestion)
-            // Lorsque nous sommes à la dernière question
-            // et que le bouton est cliqué
+    fetch('./questions.json')
+    .then(response => response.json())
+    .then(response => {
+        let questions = response.questions;
+
+        setInterval(() => {
+            if (nextButton.classList.contains(state[1]))
             {
-                nextButton.classList.remove(state[1]);
-                nextButton.classList.add(state[2]);
+                let res = document.getElementsByName('answer');
+                let checked;
+                for (let op of res)
+                    if (op.checked)
+                        checked = op;
 
-                showScore();
+                if ( ! checked)
+                    nextButton.disabled = true;
+                else nextButton.disabled = false;
+            }
+        }, 100);
 
-                nextButton.textContent = "Recommencer";
+        nextButton.addEventListener('click', function() {
+            if (nextButton.classList.contains(state[0]))
+            {
+                insertQuestion(questions[0]);
+                nextButton.classList.remove(state[0]);
+                nextButton.classList.add(state[1]);
+
+                nextButton.textContent = "Suivant";
+            }
+            else if (nextButton.classList.contains(state[1]))
+            {
+                if (questions.length <= currentQuestion)
+                {
+                    nextButton.classList.remove(state[1]);
+                    nextButton.classList.add(state[2]);
+    
+                    showScore();
+                    nextButton.textContent = "Recommencer";
+                }
+                else
+                {
+                    gameProgress();
+                }
             }
             else
             {
-                gameProgress();
+            }
+        }); 
+    
+        qTtitle.textContent = "Bienvenue dans le jeu de Quizz, Voulez vous démarrer maintenent ?";
+        nextButton.textContent = "Démarrer";
+    
+        nextButton.classList.toggle(state[0]);
+    
+        function insertQuestion(question)
+        {
+            let optLabels = "abcdefghijklmnopqrstuvw", i = 0;
+    
+            qTtitle.textContent = question.title;
+
+            if (qOptions.lastElementChild)
+                while (qOptions.lastElementChild)
+                    qOptions.removeChild(qOptions.lastElementChild);
+
+            while (question[optLabels[i]])
+            {
+                let p = document.createElement('p');
+                let answer = document.createElement('input');
+                let label = document.createElement('label');
+
+                p.classList.add('option');
+
+                answer.type = 'radio';
+                answer.name = 'answer';
+                answer.value = optLabels[i];
+                answer.setAttribute('id', 'answer' + optLabels[i]);
+
+                label.textContent = question[optLabels[i]];
+                label.setAttribute('for', 'answer' + optLabels[i]);
+    
+                p.appendChild(answer);
+                p.appendChild(label);
+    
+                qOptions.appendChild(p);
+    
+                i ++;
             }
         }
-        else
-        // Le jeu doit recommencer
+    
+        function showScore()
         {
+            qTtitle.textContent = "Votre score est de "
+            + Math.floor(score.correct / questions.length * 100) + '%';
+            qOptions.textContent = "Bonnes réponses : " + score.correct
+            + "Mauvaises réponses : " + score.incorrect;
         }
-    }); 
-
-    qTtitle.textContent = "Bienvenue dans le jeu de Quizz, Voulez vous démarrer maintenent ?";
-    nextButton.textContent = "Démarrer";
-
-    nextButton.classList.add(state[0]);
-
-    function insertQuestion(question)
-    {
-        let optLabels = ["abcdefghijklmnopqrstuvw"], i = 0;
-
-        qTtitle.textContent = question.title;
-        while (question[optLabels[i]] !== undefined)
-        // Les labels de doivent etre dans l'ordre alphabetique
-        // car dans le cas contraire dès qu'un label est inexistant
-        // la boucle s'arrete sans regarder les labels suivants.
+        /*
+ let answer = document.getElementsByName("answer");
+            for (a of answer)
+                if (a.checked)
+                {
+                    ans
+                }
+        */
+    
+        function gameProgress()
         {
-            let p = document.createElement('p');
-            let answer = document.createElement('input');
-            let label = document.createElement('label');
+            let answer;
+            for (let a of document.getElementsByName("answer"))
+                if (a.checked)
+                {
+                    answer = a.value;
+                    break;
+                }
 
-            p.classList.add('option');
+            if (!answer)
+            {
+                alert("Vous n'avez choisi aucune réponse!");
+                return;
+            }
 
-            answer.type = 'radio';
-            answer.name = 'answer';
-            answer.value = optLabels[i];
-            answer.setAttribute('id', 'answer' + optLabels[i]);
+            if (answer === questions[currentQuestion].correct)
+                score.correct ++;
+            else
+                score.incorrect ++;
 
-            label.setAttribute('for', 'answer' + optLabels[i]);
-
-            p.appendChild(answer);
-            p.appendChild(label);
-
-            qOptions.appendChild(p);
-
-            i ++;
+            currentQuestion ++;
+            
+            if (currentQuestion < questions.length)
+                insertQuestion(questions[currentQuestion]);
         }
-    }
-
-    function showScore()
-    {
-        qTtitle.textContent = "Votre score est de "
-        + Math.floor(score.correct / questions.length * 100) + '%';
-        qOptions.textContent = "Bonnes réponses : " + score.correct + "<br/>"
-        + "Mauvaises réponses : " + score.incorrect;
-    }
-
-    function gameProgress()
-    {
-        let answer = document.getElementsByName("answer").forEach(
-            function(answer) {
-                if (answer.checked)
-                    return answer.value;
-        });
-
-        if (answer === questions[currentQuestion].correct)
-            score.correct ++;
-        else
-            score.incorrect ++;
-
-        (questions[currentQuestion]);
-        currentQuestion ++;
-    }
+    });
 })();
