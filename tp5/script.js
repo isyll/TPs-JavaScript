@@ -27,7 +27,7 @@ window.onload = (function() {
                     nextButton.disabled = true;
                 else nextButton.disabled = false;
             }
-        }, 100);
+        }, 10);
 
         nextButton.addEventListener('click', function() {
             if (nextButton.classList.contains(state[0]))
@@ -40,7 +40,8 @@ window.onload = (function() {
             }
             else if (nextButton.classList.contains(state[1]))
             {
-                if (questions.length <= currentQuestion)
+                gameProgress();
+                if (currentQuestion >= questions.length)
                 {
                     nextButton.classList.remove(state[1]);
                     nextButton.classList.add(state[2]);
@@ -48,13 +49,18 @@ window.onload = (function() {
                     showScore();
                     nextButton.textContent = "Recommencer";
                 }
-                else
-                {
-                    gameProgress();
-                }
             }
             else
             {
+                nextButton.classList.remove(state[2]);
+                nextButton.classList.add(state[1]);
+
+                currentQuestion = 0;
+                insertQuestion(questions[currentQuestion]);
+                nextButton.textContent = "Suivant";
+
+                score.correct = 0;
+                score.incorrect = 0;
             }
         }); 
     
@@ -72,6 +78,8 @@ window.onload = (function() {
             if (qOptions.lastElementChild)
                 while (qOptions.lastElementChild)
                     qOptions.removeChild(qOptions.lastElementChild);
+
+            qOptions.innerHTML = '';
 
             while (question[optLabels[i]])
             {
@@ -102,17 +110,9 @@ window.onload = (function() {
         {
             qTtitle.textContent = "Votre score est de "
             + Math.floor(score.correct / questions.length * 100) + '%';
-            qOptions.textContent = "Bonnes réponses : " + score.correct
-            + "Mauvaises réponses : " + score.incorrect;
+            qOptions.innerHTML = "Bonnes réponses : " + score.correct
+            + "<br>" + "Mauvaises réponses : " + score.incorrect;
         }
-        /*
- let answer = document.getElementsByName("answer");
-            for (a of answer)
-                if (a.checked)
-                {
-                    ans
-                }
-        */
     
         function gameProgress()
         {

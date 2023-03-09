@@ -58,3 +58,7 @@ body {
     color: rgb(228, 228, 228);
 }
 
+.next-button:active {
+    transform: translate(1px, 1px);
+}
+
