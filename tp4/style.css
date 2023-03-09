@@ -1,3 +1,9 @@
+:root {
+    --btn-bcg-color:#E5B63E;
+    --body-bcg-color: #58378B;
+    --container-bcg-color: #58378B;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +14,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #58378B;
+    background-color:var(--body-bcg-color);
     font-family: 'Roboto', sans-serif;
 }
 
@@ -35,8 +41,8 @@ body {
 .generate-password {
     display: block;
     padding: 5px 10px;
-    color: #58378B;
-    background-color: #E5B63E;
+    color: var(--container-bcg-color);
+    background-color: var(--btn-bcg-color);
     border: none;
     border-radius: 10px;
     margin: 20px auto;
@@ -96,6 +102,10 @@ body {
 }
 
 #modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     width: 33%;
     height: 33%;
     padding: 10px;
@@ -103,9 +113,16 @@ body {
     background-color: white;
     border-radius: 10px;
     text-align: center;
+    font-size: 1.32rem;
 }
 
 #close-modal {
-    font-size: 1rem;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: red;
 }
 
+#close-modal:hover {
+    color: darkred;
+}

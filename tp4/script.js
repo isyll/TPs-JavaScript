@@ -28,42 +28,68 @@ window.onload = (function() {
 
     function modalWindow(text)
     {
-        const bcg = document.createElement('div');
-        const modal = document.createElement('div');
-        const closeModal = document.createElement('button');
-        const removeModalWindow = () => bcg.style.display = 'none';
+        const mw = {
+            bcg : document.createElement('div'),
+            modal : document.createElement('div'),
+            modalContent : document.createElement('div'),
+            closeModal : document.createElement('button'),
 
-        bcg.setAttribute('id', 'modal-background');
-        modal.setAttribute('id','modal');
-        closeModal.setAttribute('id', 'close-modal');
-        closeModal.textContent = 'CLOSE';
-        closeModal.style.zIndex = 1000;
+            init : function() {
+                this.bcg.setAttribute('id', 'modal-background');
+                this.modal.setAttribute('id','modal');
+                this.closeModal.setAttribute('id', 'close-modal');
+                this.modalContent.setAttribute('id', 'modal-content');
+                this.closeModal.textContent = 'Fermer';
 
-        modal.appendChild(closeModal);
-        bcg.appendChild(modal);
-        document.body.appendChild(bcg);
-        modal.textContent = text;
+                this.modalContent.textContent = text;
+                this.modal.appendChild(this.modalContent);
+                this.modal.appendChild(this.closeModal);
+                this.bcg.appendChild(this.modal);
+                document.body.appendChild(this.bcg);
 
-        closeModal.addEventListener('click', removeModalWindow);
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') removeModalWindow();
-        });
+                // setTimeout(() => {
+                //     document.body.removeChild(this.bcg);
+                // }, 1000);
+
+                this.closeModal.addEventListener('click', () => {
+                    this.removeModalWindow();
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') this.removeModalWindow();
+                });
+                this.bcg.addEventListener('click', (e) => {
+                    if (e.target !== this.modal)
+                        this.removeModalWindow();
+                });
+            },
+
+            removeModalWindow : function() {
+                this.bcg.style.visibility = 'hidden';
+                this.bcg.style.display = 'none';
+            }
+        }
+
+        mw.init();        
+    }
+
+    function notification(text) {
+
     }
 
     generateButton.addEventListener('click', (e) => {
         if ( ! pwdOptions.total() )
         {
-            alert("Vous devez d'abord indiquer une option...");
+            modalWindow("Vous devez d'abord indiquer une option...");
         }
         else if (! pwdOptions.checkLength() )
         {
-            alert("La longueur est invalide...");
+            modalWindow("La longueur est invalide...");
         }
         else if (pwdOptions.total() === 1
             && (parseInt(pwdOptions.length.value) >= 15
             && parseInt(pwdOptions.length.value) <= 20))
         {
-            alert("Vous devez cocher au moins une option...");
+            modalWindow("Vous devez cocher au moins une option...");
         }
         else
         {
@@ -80,10 +106,10 @@ window.onload = (function() {
             }
     
             let chars = [
-                pwdOptions.uppers.checked ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '',
-                pwdOptions.lowers.checked ? 'abcdefghijklmnopqrstuvwxyz' : '',
-                pwdOptions.numbers.checked ? '01234567890123456789012789' : '',
-                pwdOptions.symbols.checked ? '~!@#$%^&*()_+-={}[]:;?,./;' : '',
+                pwdOptions.uppers.checked ? shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ') : '',
+                pwdOptions.lowers.checked ? shuffle('abcdefghijklmnopqrstuvwxyz') : '',
+                pwdOptions.numbers.checked ? shuffle('01234567890123456789012789') : '',
+                pwdOptions.symbols.checked ? shuffle('~!@#$%^&*()_+-={}[]:;?,./;') : '',
             ]
 
             pwdContainer.textContent = shuffle(chars.join('')).substring(0, length);
@@ -93,7 +119,7 @@ window.onload = (function() {
             containerTop.append(cpyBtn);
             cpyBtn.addEventListener('click', (e) => {
                 navigator.clipboard.writeText(pwdContainer.textContent);
-                alert('Mot de passe copié');
+                modalWindow('Mot de passe copié');
             });
         }
     });
