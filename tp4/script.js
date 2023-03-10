@@ -1,6 +1,8 @@
 window.onload = (function() {
     'use strict';
 
+    const pwdLength = {min: 1, max: 20};
+
     let generateButton = document.getElementById('generate-password');
     let pwdContainer = document.getElementById('pwd-generated');
     let containerTop = document.querySelector('.container__top');
@@ -21,8 +23,16 @@ window.onload = (function() {
         },
 
         checkLength : () => {
-            return ! (parseInt(pwdOptions.length.value) > 20
-            || parseInt(pwdOptions.length.value) < 15);
+            return pwdOptions.length.value.length
+            && ! isNaN(pwdOptions.length.value)
+            && parseInt(pwdOptions.length.value) <= pwdLength.max
+            && parseInt(pwdOptions.length.value) >= pwdLength.min;
+        },
+
+        verifyCheckeds : () => {
+            // return pwdOptions.checkLength()
+            // && pwdOptions.total() - 1 > parseInt(pwdOptions.length.value);
+            return (pwdOptions.total()-1) <= parseInt(pwdOptions.length.value);
         }
     };
 
@@ -33,15 +43,18 @@ window.onload = (function() {
             modal : document.createElement('div'),
             modalContent : document.createElement('div'),
             closeModal : document.createElement('button'),
+            closeModalContent : document.createElement('i'),
 
             init : function() {
                 this.bcg.setAttribute('id', 'modal-background');
                 this.modal.setAttribute('id','modal');
                 this.closeModal.setAttribute('id', 'close-modal');
                 this.modalContent.setAttribute('id', 'modal-content');
-                this.closeModal.textContent = 'Fermer';
+                this.closeModalContent.classList.add('fa-solid', 'fa-x');
+                // this.closeModal.textContent = 'Fermer';
 
                 this.modalContent.textContent = text;
+                this.closeModal.appendChild(this.closeModalContent);
                 this.modal.appendChild(this.modalContent);
                 this.modal.appendChild(this.closeModal);
                 this.bcg.appendChild(this.modal);
@@ -58,8 +71,7 @@ window.onload = (function() {
                     if (e.key === 'Escape') this.removeModalWindow();
                 });
                 this.bcg.addEventListener('click', (e) => {
-                    if (e.target !== this.modal)
-                        this.removeModalWindow();
+                    if (e.target === this.bcg) this.removeModalWindow();
                 });
             },
 
@@ -72,29 +84,20 @@ window.onload = (function() {
         mw.init();        
     }
 
-    function notification(text) {
-
-    }
-
     generateButton.addEventListener('click', (e) => {
         if ( ! pwdOptions.total() )
-        {
             modalWindow("Vous devez d'abord indiquer une option...");
-        }
-        else if (! pwdOptions.checkLength() )
-        {
+        else if ( ! pwdOptions.checkLength() )
             modalWindow("La longueur est invalide...");
-        }
-        else if (pwdOptions.total() === 1
-            && (parseInt(pwdOptions.length.value) >= 15
-            && parseInt(pwdOptions.length.value) <= 20))
-        {
+        else if (pwdOptions.checkLength() && pwdOptions.total() === 1)
             modalWindow("Vous devez cocher au moins une option...");
-        }
+        else if ( ! pwdOptions.verifyCheckeds())
+            modalWindow("Le nombre d'options est supérieur à la longueur...");
         else
         {
             let length = pwdOptions.length.value.length
-            ? parseInt(pwdOptions.length.value) : 15 + Math.floor(Math.random() * 5);
+            ? parseInt(pwdOptions.length.value) : 15 + Math.floor(Math.random() * 5),
+            pwd = '';
 
             let shuffle = (str) => {
                 str = str.split('');
@@ -103,20 +106,30 @@ window.onload = (function() {
                     [str[i], str[j]] = [str[j], str[i]];
                 }
                 return str.join('');
-            }
-    
+            };
+
             let chars = [
-                pwdOptions.uppers.checked ? shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ') : '',
-                pwdOptions.lowers.checked ? shuffle('abcdefghijklmnopqrstuvwxyz') : '',
-                pwdOptions.numbers.checked ? shuffle('01234567890123456789012789') : '',
-                pwdOptions.symbols.checked ? shuffle('~!@#$%^&*()_+-={}[]:;?,./;') : '',
+                pwdOptions.uppers.checked  ? shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ') : '',
+                pwdOptions.lowers.checked  ? shuffle('abcdefghijklmnopqrstuvwxyz') : '',
+                pwdOptions.numbers.checked ? shuffle('0123456789') : '',
+                pwdOptions.symbols.checked ? shuffle('~!@#$%^&*_+-=?./;') : ''
             ]
 
-            pwdContainer.textContent = shuffle(chars.join('')).substring(0, length);
-            let cpyBtn = document.createElement('button');
-            cpyBtn.textContent = 'Copier';
-            cpyBtn.classList.add('copy-button');
+            chars = chars.filter((e) => e.length);
+
+            for (let i = 0, l = chars.length; i < length; i++)
+                pwd += chars[i%l][Math.floor(Math.random() * chars[i%l].length)];
+
+            pwdContainer.textContent = shuffle(pwd);
+
+            let cpyBtn = document.createElement('button'),
+            cpyBtnIcon = document.createElement('i');
+
+            cpyBtn.classList.add('copy-button')
+            cpyBtnIcon.classList.add('fa-light', 'fa', 'fa-copy');
+            cpyBtn.appendChild(cpyBtnIcon);
             containerTop.append(cpyBtn);
+
             cpyBtn.addEventListener('click', (e) => {
                 navigator.clipboard.writeText(pwdContainer.textContent);
                 modalWindow('Mot de passe copié');
