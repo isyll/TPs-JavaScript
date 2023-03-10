@@ -60,9 +60,9 @@ window.onload = (function() {
                 this.bcg.appendChild(this.modal);
                 document.body.appendChild(this.bcg);
 
-                // setTimeout(() => {
-                //     document.body.removeChild(this.bcg);
-                // }, 1000);
+                setTimeout(() => {
+                    document.body.removeChild(this.bcg);
+                }, 1500);
 
                 this.closeModal.addEventListener('click', () => {
                     this.removeModalWindow();
@@ -113,9 +113,7 @@ window.onload = (function() {
                 pwdOptions.lowers.checked  ? shuffle('abcdefghijklmnopqrstuvwxyz') : '',
                 pwdOptions.numbers.checked ? shuffle('0123456789') : '',
                 pwdOptions.symbols.checked ? shuffle('~!@#$%^&*_+-=?./;') : ''
-            ]
-
-            chars = chars.filter((e) => e.length);
+            ].filter((e) => e.length);
 
             for (let i = 0, l = chars.length; i < length; i++)
                 pwd += chars[i%l][Math.floor(Math.random() * chars[i%l].length)];
