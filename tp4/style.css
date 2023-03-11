@@ -1,140 +1,139 @@
 :root {
-    --btn-bcg-color:#E5B63E;
-    --body-bcg-color: #58378B;
-    --container-bcg-color: #58378B;
+  --btn-bcg-color: #e5b63e;
+  --body-bcg-color: #58378b;
+  --container-bcg-color: #58378b;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color:var(--body-bcg-color);
-    font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--body-bcg-color);
+  font-family: "Roboto", sans-serif;
 }
 
 .container {
-    width: 50%;
-    padding: 15px 10px;
-    color: white;
-    padding: 5px 10px;
-    background-color: #2A124D;
+  width: 50%;
+  padding: 15px 10px;
+  color: white;
+  padding: 5px 10px;
+  background-color: #2a124d;
 }
 
 .container__top {
-    position: relative;
-    background-color: #58378B;
-    padding: 0.5em 15px 0 15px;
-    font-size: 1.5rem;
+  position: relative;
+  background-color: #58378b;
+  padding: 0.5em 15px 0 15px;
+  font-size: 1.5rem;
 }
 
 .pwd-generated {
-    height: 1.5em;
-    text-align: center;
+  height: 1.5em;
+  text-align: center;
 }
 
 .generate-password {
-    display: block;
-    padding: 5px 10px;
-    color: var(--container-bcg-color);
-    background-color: var(--btn-bcg-color);
-    border: none;
-    border-radius: 10px;
-    margin: 20px auto;
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-decoration: uppercase;
+  display: block;
+  padding: 5px 10px;
+  color: var(--container-bcg-color);
+  background-color: var(--btn-bcg-color);
+  border: none;
+  border-radius: 10px;
+  margin: 20px auto;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-decoration: uppercase;
 }
 
 .generate-password:active {
-    transform: translate(1px,1px);
+  transform: translate(1px, 1px);
 }
 
 .options {
-    width: 100%;
-    border: none;
+  width: 100%;
+  border: none;
 }
 
 .options td {
-    padding: 5px 10px;
+  padding: 5px 10px;
 }
 
 .options td:nth-child(2) {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
 
 .form-input.input--text {
-    padding: 5px;
+  padding: 5px;
 }
 
 .copy-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 5px 10px;
-    background: none; 
-    color: white;
-    border-radius: 5px;
-    border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background: none;
+  color: white;
+  border-radius: 5px;
+  border: none;
 }
 
 .copy-button:active > i {
-    transform: translate(1px,1px);
+  transform: translate(1px, 1px);
 }
 
-
 #modal-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 33%;
-    height: 33%;
-    padding: 10px;
-    color: black;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px white;
-    text-align: center;
-    font-size: 1.32rem;
-    animation: naissance .1s 0s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 33%;
+  height: 33%;
+  padding: 10px;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px white;
+  text-align: center;
+  font-size: 1.32rem;
+  animation: naissance 0.1s 0s linear;
 }
 
 @keyframes naissance {
-    from {
-        transform: scale(0);
-    }
-    to {
-        transform: scale(1);
-    }
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 #close-modal {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: none;
-    border: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
 }
 
 #close-modal:hover {
-    color: darkred;
+  color: darkred;
 }

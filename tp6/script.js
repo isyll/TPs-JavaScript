@@ -46,8 +46,8 @@ window.onload = function() {
         return getOgj;
     }
 
-    title.innerHTML = 'On sera en ' + targetYear + ' dans';
-    setInterval(() => {
+    function insertRemaining()
+    {
         let remaining = remainingTime({year : targetYear}, true);
 
         elems.days.innerHTML = remaining.days;
@@ -57,5 +57,9 @@ window.onload = function() {
 
         for (const key in elems)
            document.querySelector('.label-' + key).innerHTML = labels[key];
-    }, 1000);
+    }
+
+    title.innerHTML = 'On sera en ' + targetYear + ' dans';
+    insertRemaining();
+    setInterval(insertRemaining, 1000);
 };
