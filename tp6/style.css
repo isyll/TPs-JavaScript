@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Kanit", sans-serif;
+}
+
+body {
+  background-image: url("image-winter.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 1.3em;
+}
+
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  gap: 50px;
+}
+
+.countdown {
+  display: flex;
+  gap: 30px;
+}
+
+.cd-item {
+  width: min-content;
+  text-align: center;
+}
+
+.days,
+.hours,
+.minutes,
+.seconds {
+  font-size: 1.5em;
+}
+
+.cd-label {
+  font-size: 0.6rem;
+  color: rgb(117, 117, 117);
+}
