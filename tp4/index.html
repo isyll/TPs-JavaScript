@@ -4,65 +4,123 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <div class="container">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <div class="container">
+      <div class="container__top">
+        <p id="pwd-generated" class="pwd-generated"></p>
+      </div>
 
-            <div class="container__top">
+      <div>
+        <table class="options">
+          <tbody>
+            <tr>
+              <td>
+                <label for="pwd-len"
+                  >Longueur du Password (entre 0 et 20 caractères)</label
+                >
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value=""
+                  autocomplete="off"
+                  size="2"
+                  class="form-input input--text"
+                  id="pwd-len"
+                  name="pwd-len"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="contains-uppers"
+                  >Contient des Lettres Majuscules</label
+                >
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  class="form-input input--checkbox"
+                  id="contains-uppers"
+                  name="contains-uppers"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="contains-lowers"
+                  >Contient des Lettres Minuscules</label
+                >
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  class="form-input input--checkbox"
+                  id="contains-lowers"
+                  name="contains-lowers"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="contains-numbers">Contient des nombres</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  class="form-input input--checkbox"
+                  id="contains-numbers"
+                  name="contains-numbers"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="contains-symbols"
+                  >Contient des caractères spéciaux</label
+                >
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  class="form-input input--checkbox"
+                  id="contains-symbols"
+                  name="contains-symbols"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-                <p id="pwd-generated" class="pwd-generated">
-
-                </p>
-
-            </div>
-
-            <div>
-
-                <table class="options">
-
-                    <tbody>
-                        <tr>
-                            <td><label for="pwd-len">Longueur du Password (entre 0 et 20 caractères)</label></td>
-                            <td><input type="text" value="" autocomplete="off" size="2" class="form-input input--text" id="pwd-len" name="pwd-len"/> </td>
-                        </tr>
-                        <tr>
-                            <td><label for="contains-uppers">Contient des Lettres Majuscules</label></td>
-                            <td><input type="checkbox" class="form-input input--checkbox" id="contains-uppers" name="contains-uppers"/> </td>
-                        </tr>
-                        <tr>
-                            <td><label for="contains-lowers">Contient des Lettres Minuscules</label></td>
-                            <td><input type="checkbox" class="form-input input--checkbox" id="contains-lowers" name="contains-lowers"/> </td>
-                        </tr>
-                        <tr>
-                            <td><label for="contains-numbers">Contient des nombres</label></td>
-                            <td><input type="checkbox" class="form-input input--checkbox" id="contains-numbers" name="contains-numbers"/> </td>
-                        </tr>
-                        <tr>
-                            <td><label for="contains-symbols">Contient des caractères spéciaux</label></td>
-                            <td><input type="checkbox" class="form-input input--checkbox" id="contains-symbols" name="contains-symbols"/> </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-
-            <div class="container__action">
-                <button class="generate-password" id="generate-password">
-                    Générer le password
-                </button>
-            </div>
-        </div>
-        <script src="script.js" async defer></script>
-    </body>
+      <div class="container__action">
+        <button class="generate-password" id="generate-password">
+          Générer le password
+        </button>
+      </div>
+    </div>
+    <!-- <script type="module" src="passwordGenerator.js"></script> -->
+    <script src="script.js" defer></script>
+  </body>
 </html>
